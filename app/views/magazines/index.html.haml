@@ -2,7 +2,7 @@
 - @magazines.each do |magazine|
 	.magazine
 		.magazine_title
-			%h4= magazine.display_title
+			%h4=  link_to magazine.display_title, magazine_path(magazine)
 		.magazine_cover
 			= image_tag magazine.cover
 		.magazine_description

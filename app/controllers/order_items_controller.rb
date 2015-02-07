@@ -6,7 +6,7 @@ class OrderItemsController < ApplicationController
     
     respond_to do |format|
       if @order_item.save
-        format.html { redirect_to carts_path, notice: "Nowy produkt dodany do koszyka"}
+        format.html { redirect_to magazines_path, notice: "Nowy produkt dodany do koszyka"}
       else
         format.html { redirect_to magazine_path(@magazine), notice: "Nie udało się dodać produktu do koszyka:("}
       end
