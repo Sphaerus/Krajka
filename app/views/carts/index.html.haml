@@ -1,0 +1,22 @@
+= "Koszyk"
+- if @cart.order_items_without_order.count > 0
+	= simple_form_for @order do |f|
+		- @cart.order_items_without_order.each_with_index do |order_item, index|
+			.magazine
+				.magazine_title
+					%h4= order_item.magazine.display_title
+				.magazine_cover
+					= image_tag order_item.magazine.cover
+				.magazine_description
+					%p= order_item.magazine.description.truncate(100)
+				.order_item_summary
+					%p= "Cena pojedynczego egzemplarza: " + order_item.magazine.display_price
+					%p= "Ilość sztuk: #{order_item.amount}"
+					%p= "Cała cena: " + order_item.display_price
+			= f.simple_fields_for :order_items do |ff|
+				= ff.input :id, input_html: {value: order_item.id }, as: :hidden
+				= ff.input :to_order, label: "Dodaj do zamówienia", as: :boolean		
+					
+		= f.submit			
+- else 
+	%p= "Twój koszyk jest pusty"				

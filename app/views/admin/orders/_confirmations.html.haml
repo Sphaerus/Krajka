@@ -1,0 +1,9 @@
+- case order.status
+- when :not_confirmed_by_admin
+	%td= link_to "Potwierdź zapłatę", admin_order_path(order, confirmed: true), method: :put
+- when :confirmed_by_admin
+	%td
+		= "Zapłata potwierdzona"
+		%p= link_to "Cofnij potwierdzenie", admin_order_path(order, confirmed: false), method: :put
+- when :not_ordered
+	%td= "Zamówienie niepotwierdzone przez użytkownika"

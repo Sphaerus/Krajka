@@ -1,0 +1,4 @@
+= simple_form_for @user, url: admin_user_path(@user) do |f|
+	= f.input :admin, label: "Administrator"
+	= f.input :coordinator, label: "Koordynator"
+	= f.submit "Zapisz zmiany", class: "btn btn-primary"

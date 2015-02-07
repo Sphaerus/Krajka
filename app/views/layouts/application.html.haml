@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Krajka
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .main-page-container
+      = link_to "Home", root_path		
+      - if user_signed_in?
+        = current_user.email
+        = link_to "Log out", destroy_user_session_path, method: :delete
+        = link_to "Dodaj numer", new_magazine_path
+        = link_to "Koszyk", carts_path
+        = link_to "Moje zamówienia", orders_path
+        = link_to "Uzytkownicy", admin_users_path
+        = link_to "Zamówienia", all_orders_admin_orders_path
+      - else
+        = link_to "Log in", new_user_session_path
+        = link_to "Sign up", new_user_registration_path  								
+      %h1.logo= "Krajka"	
+      = render 'layouts/flash_messages'
+      = yield

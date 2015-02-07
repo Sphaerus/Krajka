@@ -1,0 +1,8 @@
+- case order.status
+- when :not_confirmed_by_admin
+	= "Tutaj będą dane do przelewu"
+- when :confirmed_by_admin
+	%td
+		= "Zapłata potwierdzona"
+- when :not_ordered
+	= link_to "Potwierdź zamówienie", order_path(@order, ordered: true), method: :put		

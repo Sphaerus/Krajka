@@ -1,0 +1,11 @@
+%table.table.table-striped
+	%th= "Numer zamówienia"
+	%th= "Email uzytkownika"
+	%th
+	- @orders.each do |order|
+		%tr
+			%td= link_to order.id, order_path(order)
+			%td= order.user.email
+			= render "confirmations", order: order 
+			
+				

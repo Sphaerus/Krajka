@@ -1,0 +1,8 @@
+= simple_form_for @magazine do |f|
+	= f.input :title
+	= f.input :description
+	= f.input :price
+	= f.input :date
+	= f.input :cover, as: :file, multiple: true
+	= f.input :cover_cache, as: :hidden
+	= f.submit

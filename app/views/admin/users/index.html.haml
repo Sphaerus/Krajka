@@ -1,0 +1,11 @@
+%table.table
+	%th= "ID"
+	%th= "Email"
+	%th
+	- @users.each do |user|
+		%tr
+			%td= user.id
+			%td= user.email
+			%td
+				= link_to "Edytuj", edit_admin_user_path(user), class: " btn btn-primary"
+				= link_to "Zamówienia", admin_user_orders_path(user_id: user.id)

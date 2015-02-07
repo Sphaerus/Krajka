@@ -1,0 +1,15 @@
+.magazine
+	.magazine_title
+		%h4= @magazine.display_title
+	.magazine_cover
+		= image_tag @magazine.cover
+	.magazine_price
+		= @magazine.display_price
+	.magazine_description
+		%p= @magazine.description	
+	= "Zamów teraz!"
+	
+	= simple_form_for @order_item, path: order_item_path do |f|
+		= f.input :amount
+		= f.input :magazine_id, as: :hidden, input_html:{ value: @magazine.id } 
+		= f.submit

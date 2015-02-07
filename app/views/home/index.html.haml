@@ -1,0 +1,12 @@
+%h2= "Wszystkie numery"
+- @magazines.each do |magazine|
+	.magazine
+		.magazine_title
+			%h4= link_to magazine.display_title, magazine_path(magazine)
+		.magazine_cover
+			= image_tag magazine.cover
+		.magazine_description
+			%p= magazine.description	
+		.magazine_links	
+			= link_to "Edytuj", edit_magazine_path(magazine)	
+			= link_to "Usuń", magazine_path(magazine), method: :delete

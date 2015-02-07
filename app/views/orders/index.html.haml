@@ -1,0 +1,4 @@
+- @orders.each do |order|
+  .order
+    = link_to order.display_id, order_path(order)
+    %p= "Status: #{display_order_status(order)}"

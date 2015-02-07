@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cart_id: 
+  order_id: 
+  magazine_id: 
+  amount: 1
+
+two:
+  cart_id: 
+  order_id: 
+  magazine_id: 
+  amount: 1
