@@ -1,3 +1,4 @@
+%h4= "Moje zamowienia"
 - @orders.each do |order|
   .order
     = link_to order.display_id, order_path(order)

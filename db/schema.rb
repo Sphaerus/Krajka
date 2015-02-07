@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207142540) do
+ActiveRecord::Schema.define(version: 20150207171852) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "street",      limit: 255
+    t.string   "postal_code", limit: 255
+    t.string   "province",    limit: 255
+    t.string   "town",        limit: 255
+    t.string   "country",     limit: 255
+    t.string   "other",       limit: 255
+    t.integer  "user_id",     limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -72,8 +87,10 @@ ActiveRecord::Schema.define(version: 20150207142540) do
     t.integer  "user_id",    limit: 4
     t.boolean  "ordered",    limit: 1
     t.boolean  "confirmed",  limit: 1
+    t.integer  "address_id", limit: 4
   end
 
+  add_index "orders", ["address_id"], name: "index_orders_on_address_id", using: :btree
   add_index "orders", ["cart_id"], name: "index_orders_on_cart_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -96,8 +113,10 @@ ActiveRecord::Schema.define(version: 20150207142540) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "addresses", "users"
   add_foreign_key "carts", "users"
   add_foreign_key "order_items", "carts"
   add_foreign_key "order_items", "magazines"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "addresses"
 end
