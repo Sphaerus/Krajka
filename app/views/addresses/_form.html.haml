@@ -4,5 +4,6 @@
 	= f.input :postal_code, placeholder: "Kod pocztowy"
 	= f.input :town, placeholder: "Miejscowość"
 	= f.input :province, placeholder: "Województwo"
-	= f.input :country, placeholder: "Kraj"
+	= f.input :country, placeholder: "Kraj", as: :string
 	= f.input :other, placeholder: "Dodatkowe informacje"
+	= f.submit
