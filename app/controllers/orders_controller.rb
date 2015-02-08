@@ -12,8 +12,14 @@ class OrdersController < ApplicationController
   
   def create
     @order.assign_attributes(orders_params)
-    @order.save
-    redirect_to orders_path, notice: "Dodano nowe zamówienie"
+    
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to orders_path, notice: "Dodano nowe zamówienie"}
+      else
+        format.html { redirect_to carts_path, alert: "#{display_errors(@order)}"}
+      end
+    end    
   end
   
   def update
@@ -39,6 +45,6 @@ class OrdersController < ApplicationController
   end
 
   def orders_params
-    params.require(:order).permit(order_items_attributes: [:to_order, :id])
+    params.require(:order).permit(:address_id, order_items_attributes: [:to_order, :id])
   end  
 end

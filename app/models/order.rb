@@ -1,7 +1,10 @@
 class Order < ActiveRecord::Base
   belongs_to :user
-  has_one :address
-  has_many :order_items
+  belongs_to :address
+  has_many :order_items, dependent: :destroy
+  
+  validates :address_id, presence: true
+  validate :any_order_items?
     
   accepts_nested_attributes_for :order_items
   
@@ -23,6 +26,12 @@ class Order < ActiveRecord::Base
       end
     else
       return :not_ordered
+    end
+  end
+  
+  def any_order_items?
+    unless order_items.any? {|order_item| order_item.to_order == "1"}
+      self.errors["zamowienie"] = "nie moze byc zlozone bez wybrania produktow"
     end
   end
 
