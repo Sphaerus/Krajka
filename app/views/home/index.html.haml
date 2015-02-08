@@ -8,5 +8,5 @@
 		.magazine_description
 			%p= magazine.description	
 		.magazine_links	
-			= link_to "Edytuj", edit_magazine_path(magazine)	
-			= link_to "Usuń", magazine_path(magazine), method: :delete
+			= link_to "Edytuj", edit_magazine_path(magazine) if policy(Magazine).edit?
+			= link_to "Usuń", magazine_path(magazine), method: :delete if policy(Magazine).destroy?

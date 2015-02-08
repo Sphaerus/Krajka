@@ -2,7 +2,8 @@ class AddressesController < ApplicationController
   before_action :set_address, only: [:edit, :update, :destroy]
   
   def index
-    @addresses = Address.all
+    @addresses = current_user.addresses
+    authorize @addresses
   end
   
   def new
@@ -11,6 +12,7 @@ class AddressesController < ApplicationController
   
   def edit
     @address = Address.find(params[:id])
+    authorize @address
   end
   
   def create
@@ -26,6 +28,7 @@ class AddressesController < ApplicationController
   end
   
   def update
+    authorize @address
     respond_to do |format|
       if @address.update_attributes(address_params)
         format.html { redirect_to addresses_path, notice: "Adres pomyślnie zatkualizowano"}
@@ -36,6 +39,7 @@ class AddressesController < ApplicationController
   end
   
   def destroy
+    authorize @address
     @address.destroy
     redirect_to addresses_path, notice: "Adres usunięty"
   end

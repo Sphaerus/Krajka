@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :set_magazine, only: [:create]
+  before_action :set_order_item, only: [:destroy]
   
   def create
     @order_item = current_user.cart.order_items.build(order_item_params)
@@ -13,7 +14,16 @@ class OrderItemsController < ApplicationController
     end
   end
   
+  def destroy
+    @order_item.destroy
+    redirect_to carts_path, alert: "Przedmiot usunięty z koszyka"
+  end
+  
   private
+  
+  def set_order_item
+    @order_item = OrderItem.find(params[:id])
+  end
   
   def set_magazine
     @magazine = Magazine.find(params[:order_item][:magazine_id])

@@ -43,6 +43,9 @@ gem "simple_form"
 #authentication
 gem 'devise'
 
+#authorization
+gem "pundit", branch: "namespaces"
+
 #file-upload
 gem 'carrierwave'
 gem "mini_magick"

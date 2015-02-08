@@ -9,7 +9,8 @@
 		%p= @magazine.description	
 	= "Zamów teraz!"
 	
-	= simple_form_for @order_item, path: order_item_path do |f|
-		= f.input :amount
-		= f.input :magazine_id, as: :hidden, input_html:{ value: @magazine.id } 
-		= f.submit
+	- if current_user
+		= simple_form_for @order_item, path: order_item_path do |f|
+			= f.input :amount
+			= f.input :magazine_id, as: :hidden, input_html:{ value: @magazine.id } 
+			= f.submit

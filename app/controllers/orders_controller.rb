@@ -5,9 +5,11 @@ class OrdersController < ApplicationController
   
   def index
     @orders = current_user.orders
+    authorize @orders
   end
   
   def show
+    authorize @order
   end
   
   def create
@@ -23,6 +25,7 @@ class OrdersController < ApplicationController
   end
   
   def update
+    authorize @order
     respond_to do |format|
       if @order.update_attributes(orders_params)
         format.html { redirect_to @order, notice: "Zamówienie zostało zaktualizowane"}
@@ -33,6 +36,7 @@ class OrdersController < ApplicationController
   end
   
   def confirm_order_by_user
+    authorize @order
     @order.order!
     
     respond_to do |format|
@@ -55,6 +59,6 @@ class OrdersController < ApplicationController
   end
 
   def orders_params
-    params.require(:order).permit(:address_id, order_items_attributes: [:to_order, :id])
+    params.require(:order).permit(:address_id, :payment_date, order_items_attributes: [:to_order, :id])
   end  
 end

@@ -5,12 +5,15 @@ class Admin::OrdersController < ApplicationController
   
   def index
     @orders = @user.orders
+    authorize @orders
   end
   
   def all_orders
+    authorize @orders
   end
   
   def update
+    authorize @order
     @order.confirmed = params[:confirmed]
     @order.save
     

@@ -2,6 +2,7 @@
 - if @cart.order_items_without_order.count > 0
 	= simple_form_for @order do |f|
 		= f.input :address_id, collection: current_user.addresses.map {|address| [address.designation, address.id]}
+		= f.input :payment_date
 		= f.simple_fields_for :order_items do |ff|
 			.magazine
 				.magazine_title
@@ -16,6 +17,7 @@
 					%p= "Cała cena: " + ff.object.display_price	
 			.carts_link
 				= ff.input :to_order, label: "Dodaj do zamówienia", as: :boolean
+				= link_to "Usuń z koszyka", order_item_path(ff.object), method: :delete, class: "btn btn-danger"
 					
 		= f.submit			
 - else 

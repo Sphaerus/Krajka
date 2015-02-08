@@ -11,14 +11,17 @@ class MagazinesController < ApplicationController
   
   def new
     @magazine = Magazine.new
+    authorize @magazine
   end
   
   def edit
     @magazine = Magazine.find(params[:id])
+    authorize @magazine
   end
   
   def create
     @magazine = Magazine.new(magazine_params)
+    authorize @magazine
     
     respond_to do |format|
       if @magazine.save
@@ -31,6 +34,7 @@ class MagazinesController < ApplicationController
   
   def update
     @magazine = Magazine.find(params[:id])
+    authorize @magazine
     
     respond_to do |format|
       if @magazine.update_attributes(magazine_params)
@@ -43,6 +47,7 @@ class MagazinesController < ApplicationController
   
   def destroy
     @magazine = Magazine.find(params[:id])
+    authorize @magazine
     
     @magazine.destroy
     redirect_to magazines_path

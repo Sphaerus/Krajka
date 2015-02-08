@@ -11,6 +11,7 @@
 		%p= @order.address.other
 		= simple_form_for @order do |f|
 			= f.input :address_id, collection: current_user.addresses.map {|address| [address.designation, address.id]}, label: false
+			= f.input :payment_date
 			= f.submit "Zmień adres"
 
 - @order.order_items.each do |order_item|

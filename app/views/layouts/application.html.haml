@@ -11,12 +11,12 @@
       = link_to "Home", root_path		
       - if user_signed_in?
         = current_user.email
-        = link_to "Log out", destroy_user_session_path, method: :delete
-        = link_to "Dodaj numer", new_magazine_path
+        = link_to "Log out", destroy_user_session_path, method: :delete 
+        = link_to "Dodaj numer", new_magazine_path if policy(Magazine).new?
         = link_to "Koszyk", carts_path
-        = link_to "Moje zamówienia", orders_path
-        = link_to "Uzytkownicy", admin_users_path
-        = link_to "Zamówienia", all_orders_admin_orders_path
+        = link_to "Moje zamówienia", orders_path 
+        = link_to "Uzytkownicy", admin_users_path if policy(User).index? 
+        = link_to "Zamówienia", all_orders_admin_orders_path if policy(Order).all_orders?
         = link_to "Adresy", addresses_path
       - else
         = link_to "Log in", new_user_session_path
