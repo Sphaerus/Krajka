@@ -1,6 +1,17 @@
 .order_title
 	%h4= @order.display_id
-	
+	.address
+		%h3= @order.address.designation
+		%p= @order.address.name
+		%p= @order.address.street
+		%p= @order.address.postal_code
+		%p= @order.address.town
+		%p= @order.address.province
+		%p= @order.address.country
+		%p= @order.address.other
+		= simple_form_for @order do |f|
+			= f.input :address_id, collection: current_user.addresses.map {|address| [address.designation, address.id]}, label: false
+			= f.submit "Zmień adres"
 
 - @order.order_items.each do |order_item|
 	.magazine

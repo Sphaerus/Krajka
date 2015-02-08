@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :build_order, only: [:create]
-  before_action :set_order, only: [:show, :update]
+  before_action :set_order, only: [:show, :update, :confirm_order_by_user]
   before_action :assign_order_items, only: [:create]
   
   def index
@@ -23,10 +23,20 @@ class OrdersController < ApplicationController
   end
   
   def update
+    respond_to do |format|
+      if @order.update_attributes(orders_params)
+        format.html { redirect_to @order, notice: "Zamówienie zostało zaktualizowane"}
+      else
+        format.html { render action: "show", alert: "#{display_errors(@order)}"}
+      end  
+    end
+  end
+  
+  def confirm_order_by_user
     @order.order!
     
-    redirect_to do |format|
-      format.html {redirect_to order_path(@order)}
+    respond_to do |format|
+      format.html {redirect_to order_path(@order), notice: "Potwierdziłeś zamówienie"}
     end
   end
   

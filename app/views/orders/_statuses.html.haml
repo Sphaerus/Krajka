@@ -5,4 +5,4 @@
 	%td
 		= "Zapłata potwierdzona"
 - when :not_ordered
-	= link_to "Potwierdź zamówienie", order_path(@order, ordered: true), method: :put		
+	= link_to "Potwierdź zamówienie", confirm_order_by_user_order_path(@order, ordered: true), method: :put		

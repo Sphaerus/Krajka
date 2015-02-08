@@ -9,7 +9,9 @@ Rails.application.routes.draw do
    resources :magazines
    resources :order_items
    resources :carts
-   resources :orders
+   resources :orders do
+     put "confirm_order_by_user", on: :member
+   end
    resources :addresses
    
    namespace :admin do
