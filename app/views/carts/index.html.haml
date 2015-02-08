@@ -1,6 +1,7 @@
 = "Koszyk"
 - if @cart.order_items_without_order.count > 0
 	= simple_form_for @order do |f|
+		=# f.input :address, collection: current_user.addresses.map {|address| [address.designation, address.id]}
 		= f.simple_fields_for :order_items do |ff|
 			.magazine
 				.magazine_title

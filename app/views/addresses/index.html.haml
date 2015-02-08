@@ -5,6 +5,7 @@
 		.address_link
 			= link_to "Edytuj", edit_address_path(address)
 			= link_to "Usuń", address_path(address), method: :delete
+		%h3= address.designation
 		%p= address.name
 		%p= address.street
 		%p= address.postal_code

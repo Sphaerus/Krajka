@@ -14,7 +14,7 @@ class AddressesController < ApplicationController
   end
   
   def create
-    @address = Address.new(address_params)
+    @address = current_user.addresses.build(address_params)
     
     respond_to do |format|
       if @address.save
@@ -47,6 +47,6 @@ class AddressesController < ApplicationController
   end
   
   def address_params
-    params.require(:address).permit(:name, :street, :other, :town, :country, :province, :postal_code)
+    params.require(:address).permit(:designation, :name, :street, :other, :town, :country, :province, :postal_code)
   end
 end

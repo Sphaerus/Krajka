@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_one :address
   has_many :order_items
-  
+    
   accepts_nested_attributes_for :order_items
   
   def display_id
@@ -25,4 +25,5 @@ class Order < ActiveRecord::Base
       return :not_ordered
     end
   end
+
 end
